@@ -12,10 +12,10 @@ console.log = e => {
   logStdout.write(util.format(e) + "\n");
 };
 
-const mongoURI = require("./config/keys").mongoURI;
+// const mongoURI = require("./config/keys").mongoURI;
 
 const mongoose = require("mongoose");
-mongoose.connect(mongoURI, { useNewUrlParser: true }, err => {
+mongoose.connect(process.env.mongoURI, { useNewUrlParser: true }, err => {
   if (err) console.log(err);
 });
 

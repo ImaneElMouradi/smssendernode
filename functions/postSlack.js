@@ -1,5 +1,5 @@
 // incoming webhook in order to send messages to slack channel (real time)
-const slackHook = require("../config/keys").slackHook;
+// const slackHook = require("../config/keys").slackHook;
 const request = require("request");
 
 // I mean, why not? xd
@@ -35,10 +35,13 @@ const postSlack = (id, first_name, last_name, pb) => {
   };
   payload = JSON.stringify(payload);
 
-  request({ url: slackHook, body: payload, method: "POST" }, (err, data) => {
-    if (data) console.log(`the message to slack is ${data.body}`);
-    if (err) console.log(err);
-  });
+  request(
+    { url: process.env.slackHook, body: payload, method: "POST" },
+    (err, data) => {
+      if (data) console.log(`the message to slack is ${data.body}`);
+      if (err) console.log(err);
+    }
+  );
 };
 
 module.exports = postSlack;

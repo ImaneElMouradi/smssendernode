@@ -10,11 +10,11 @@ const opts = {
 const saveCandidate = require("./saveCandidate");
 const postCallSMS = require("./postCallSMS");
 
-const recruiteeKeyTest = require("../config/keys").recruiteeKeyTest;
-const recruiteeKeyProd = require("../config/keys").recruiteeKeyProd;
+// const recruiteeKeyTest = require("../config/keys").recruiteeKeyTest;
+// const recruiteeKeyProd = require("../config/keys").recruiteeKeyProd;
 
-const companyId_test = require("../config/keys").companyId_test;
-const companyId_prod = require("../config/keys").companyId_prod;
+// const companyId_test = require("../config/keys").companyId_test;
+// const companyId_prod = require("../config/keys").companyId_prod;
 
 const send_SMS = (message, req, res) => {
   // we get the candidate's email from mixmax webhook
@@ -25,9 +25,11 @@ const send_SMS = (message, req, res) => {
   request(
     {
       headers: {
-        Authorization: recruiteeKeyTest
+        Authorization: process.env.recruiteeKeyTest
       },
-      url: `https://api.recruitee.com/c/${companyId_test}/search/new/quick?query=${candidateEmail}`,
+      url: `https://api.recruitee.com/c/${
+        process.env.companyId_test
+      }/search/new/quick?query=${candidateEmail}`,
       method: "GET",
       json: true
     },

@@ -9,7 +9,7 @@ const opts = {
   retries: 4
 };
 
-const bulksmsToken = require("../config/keys").bulksmsToken;
+// const bulksmsToken = require("../config/keys").bulksmsToken;
 const sender = "itwins"; // you can add in the API /&shortcode=${sender}/
 
 // url for production: bulksms https://bulksms.ma/developer/sms/send?token=${bulksmsToken}&tel=${phoneNum}&message=${message}
