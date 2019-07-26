@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 
 const fs = require("fs");
 const util = require("util");
@@ -29,20 +28,10 @@ db.once("open", () => {
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
 
 // endpoint (of the 3rd party's webhook)
 const routerWebhook = require("./routes/webhook/sms");
 app.use("/", routerWebhook);
-
-// api used by front-end app
-const routerApi = require("./routes/api/candidates");
-app.use("/", routerApi);
-
-// serve up static assets
-if (process.send.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
