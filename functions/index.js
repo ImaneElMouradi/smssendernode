@@ -19,7 +19,6 @@ const companyId_prod = require("../config/keys").companyId_prod;
 const send_SMS = (message, req, res) => {
   // we get the candidate's email from mixmax webhook
   const candidateEmail = req.body.to[0].email;
-  console.log(candidateEmail);
 
   // we use the email to send an http get request to recruitee to get other data
   // then we send SMS if phone number is available and correct
