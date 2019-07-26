@@ -33,7 +33,7 @@ const postCallSMS = (res, phoneNum, id, first_name, last_name, message) => {
     (err, response, body) => {
       if (response) {
         // console.log("The number of request attempts: " + response.attempts); // works with requestretry but had problem with it...
-        res.send("send SMS to " + phoneNum);
+        res.send("send SMS to " + phoneNum + ". Message: " + message);
       }
       if (err) {
         console.log(
