@@ -56,7 +56,7 @@ const send_SMS = (message, req, res) => {
       }
       if (err)
         console.log(
-          `Error in fetching candidate (email: ${candidateEmail}) data in Recruitee: ${err}`
+          `Error in fetching candidate (email: ${candidateEmail}) data from Recruitee: ${err}`
         );
     }
   );

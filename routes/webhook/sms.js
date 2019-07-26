@@ -2,11 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
-const send_SMS = require("../../functions/index");
+const send_SMS = require("../../functions/send");
+
+const verifyToken = require("../../functions/verifyToken");
 
 // endpoints for mixmax webhook
 
-router.post("/sms/send_quiz", (req, res) => {
+router.post("/sms/send_quiz", verifyToken, (req, res) => {
   // this endpoint is for the quiz phase
   const message =
     "Congratulations! You have been selected to move to the next step of the hiring process at United Remote. We kindly ask that you complete one of the short tech quizzes sent to you on your email address.  ";

@@ -15,7 +15,7 @@ const sender = "itwins"; // you can add in the API /&shortcode=${sender}/
 // url for production: bulksms https://bulksms.ma/developer/sms/send?token=${bulksmsToken}&tel=${phoneNum}&message=${message}
 
 // url used for testing purposes only, will be replaced with bulksms url
-const testUrl = "https://enclxpzaktp8s.x.pipedream.net/SendSMS";
+const testUrl = "https://en0bf1o2s239lv.x.pipedream.net/SendSMS";
 
 // function to send SMS - uses bulksms.ma (mock for now) - 5 tries
 const postCallSMS = (res, phoneNum, id, first_name, last_name, message) => {

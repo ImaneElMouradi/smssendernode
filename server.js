@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+// for process.env variables
+const dotenv = require("dotenv");
+dotenv.config();
+
 const fs = require("fs");
 const util = require("util");
 
