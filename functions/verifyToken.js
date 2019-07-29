@@ -1,7 +1,7 @@
 // a middleware for token verification
 
 const verifyToken = (req, res, next) => {
-  const token = req.header("smsender_token");
+  const token = req.header("sms-token");
   if (!token)
     return res.status(401).send({
       success: false,

@@ -46,6 +46,12 @@ const send_SMS = (message, req, res) => {
           } else {
             saveCandidate("no phone number", id, first_name, last_name, res);
           }
+        } else {
+          // if there's no candidate with the same email address received form mixmax
+          res.status(400).json({
+            success: false,
+            error: `candidate not found on Recruitee (email: ${candidateEmail}) `
+          });
         }
         if (err) {
           console.log(
@@ -53,7 +59,7 @@ const send_SMS = (message, req, res) => {
           );
           res.status(400).json({
             success: false,
-            message: `couldn't fetch candidate's data (email: ${candidateEmail}) from recruitee`
+            message: `Error in fetching candidate's data (email: ${candidateEmail}) from recruitee`
           });
         }
       }
