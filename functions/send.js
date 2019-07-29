@@ -20,10 +20,10 @@ const send_SMS = (message, req, res) => {
     request(
       {
         headers: {
-          Authorization: process.env.recruiteeKeyTest
+          Authorization: process.env.recruiteeKeyProd
         },
         url: `https://api.recruitee.com/c/${
-          process.env.companyId_test
+          process.env.companyId_prod
         }/search/new/quick?query=${candidateEmail}`,
         method: "GET",
         json: true
