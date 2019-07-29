@@ -8,12 +8,21 @@ const emojis = [
   ":face_with_raised_eyebrow:",
   ":thinking_face:",
   ":disappointed_relieved:",
-  ":confused:"
+  ":confused:",
+  ":scream:",
+  ":cry:",
+  ":sob:",
+  ":astonished:",
+  ":fearful:",
+  ":cold_sweat:",
+  ":skull:",
+  ":weary:",
+  ":dizzy_face:"
 ];
 
 // function to send a real time message to slack whenever an SMS fails
 const postSlack = (id, first_name, last_name, pb) => {
-  const randomNum = Math.floor(Math.random() * 4);
+  const randomNum = Math.floor(Math.random() * 13);
   var payload = {
     text:
       "*Failed to send SMS* " +
@@ -38,8 +47,8 @@ const postSlack = (id, first_name, last_name, pb) => {
   request(
     { url: process.env.slackHook, body: payload, method: "POST" },
     (err, data) => {
-      if (data) console.log(`the message to slack is ${data.body}`);
-      if (err) console.log(err);
+      if (data) console.log(`Slack message: Fail SMS to candidateId: ${id}`);
+      if (err) console.log(`Error: ${err}`);
     }
   );
 };

@@ -1,10 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-// for process.env variables
-const dotenv = require("dotenv");
-dotenv.config();
-
+// for logs
 const fs = require("fs");
 const util = require("util");
 
@@ -16,12 +13,14 @@ console.log = e => {
   logStdout.write(util.format(e) + "\n");
 };
 
-// const mongoURI = require("./config/keys").mongoURI;
+// for process.env variables
+const dotenv = require("dotenv");
+dotenv.config();
 
 const mongoose = require("mongoose");
-mongoose.connect(process.env.mongoURI, { useNewUrlParser: true }, err => {
-  if (err) console.log(err);
-});
+mongoose
+  .connect(process.env.mongoURI, { useNewUrlParser: true })
+  .catch(err => console.log(err));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -35,7 +34,7 @@ app.use(bodyParser.json());
 
 // endpoint (of the 3rd party's webhook)
 const routerWebhook = require("./routes/webhook/sms");
-app.use("/", routerWebhook);
+app.use("/sms", routerWebhook);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

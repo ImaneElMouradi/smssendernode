@@ -26,7 +26,17 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
         candidate.save((err, candidate) => {
           if (err) return console.error(err);
           postSlack(id, first_name, last_name, pb);
-          res.send(candidate.candidateId + " saved to the database : " + pb);
+          console.log(candidate.candidateId + " saved to the database : " + pb);
+          res.json({
+            saveCandidate: {
+              update: false,
+              smsFail: {
+                id: `${id}`,
+                to: `${first_name} ${last_name}`,
+                problem: `${pb}`
+              }
+            }
+          });
         });
       } else {
         // updating if candidate exists
@@ -48,9 +58,20 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
             if (err) return res.send(500, { error: err });
             postSlack(id, first_name, last_name, pb);
 
-            return res.send(
+            console.log(
               candidate.candidateId + " saved to the database (update) : " + pb
             );
+
+            res.json({
+              saveCandidate: {
+                update: true,
+                smsFail: {
+                  id: `${id}`,
+                  to: `${first_name} ${last_name}`,
+                  problem: `${pb}`
+                }
+              }
+            });
           }
         );
       }
