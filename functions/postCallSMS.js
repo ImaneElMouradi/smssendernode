@@ -12,7 +12,7 @@ const opts = {
 const shortcode = "United Remote"; // you can add in the API /&shortcode=${sender}/
 
 // url used for testing purposes only, will be replaced with bulksms url
-// prod: https://bulksms.ma/developer/sms/send?token=${bulksmsToken}&tel=${phoneNum}&message=${message}
+// prod: https://bulksms.ma/developer/sms/send?token=${process.env.bulksmsToken}&tel=${phoneNum}&message=${message}
 const testUrl = "https://en0bf1o2s239lv.x.pipedream.net/SendSMS";
 
 // function to send SMS - uses bulksms.ma (mock for now) - 5 tries

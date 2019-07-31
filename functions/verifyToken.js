@@ -19,7 +19,7 @@ const verifyToken = (req, res, next) => {
         error: "Invalid token"
       });
     }
-  } catch {
+  } catch (err) {
     res.status(400).send("Invalid token");
   }
 };
