@@ -10,6 +10,7 @@ const verifyToken = require("../../functions/verifyToken");
 
 router.post("/send_quiz", verifyToken, (req, res) => {
   // endpoint  for the quiz phase
+  console.log(req);
   const message =
     "Congratulations! You have been selected to move to the next step of the hiring process at United Remote. We kindly ask that you complete one of the short tech quizzes sent to you on your email address.  ";
   send_SMS(message, req, res);
