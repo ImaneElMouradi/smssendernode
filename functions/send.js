@@ -12,6 +12,7 @@ const postCallSMS = require("./postCallSMS");
 
 const send_SMS = (message, req, res) => {
   // we get the candidate's email from mixmax webhook
+  console.log(req.body);
   const candidateEmail = req.body.to[0].email;
 
   // we use the email to send an http get request to recruitee to get other data
