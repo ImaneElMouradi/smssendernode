@@ -13,6 +13,7 @@ const verifyPhoneNumber = require("./verifyPhoneNumber");
 const customizeSMS = require("./customizeSMS");
 
 const send_SMS = (message, req, res) => {
+  console.log(req.body);
   // we get the candidate's email from mixmax webhook
   const candidateEmail = req.body.to[0].email;
 
