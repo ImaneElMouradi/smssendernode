@@ -33,19 +33,16 @@ const send_SMS = (message, req, res) => {
       (err, resp, body) => {
         if (resp.body.candidates.total >= 1) {
           const { id, name, phones } = body.candidates.hits[0];
-          // or just change db model to "name" and functions params
-          const first_name = name.split(" ")[0];
-          const last_name = name.split(" ")[1];
 
           if (typeof phones !== "undefined") {
             const phoneNum = phones[0]; // have to check if the number is valid (format like 06- etc)
             if (!verifyPhoneNumber(phoneNum)) {
-              saveCandidate("Wrong number", id, first_name, last_name, res);
+              saveCandidate("Wrong number", id, name, res);
             } else {
-              postCallSMS(res, phoneNum, id, first_name, last_name, message);
+              postCallSMS(res, phoneNum, id, name, message);
             }
           } else {
-            saveCandidate("no phone number", id, first_name, last_name, res);
+            saveCandidate("no phone number", id, name, res);
           }
         } else {
           // if there's no candidate with the same email address received form mixmax

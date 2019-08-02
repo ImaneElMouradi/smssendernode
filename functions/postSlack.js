@@ -21,7 +21,7 @@ const emojis = [
 ];
 
 // function to send a real time message to slack whenever an SMS fails
-const postSlack = (id, first_name, last_name, pb) => {
+const postSlack = (id, name, pb) => {
   const randomNum = Math.floor(Math.random() * 13);
   var payload = {
     text:
@@ -31,11 +31,8 @@ const postSlack = (id, first_name, last_name, pb) => {
       "*Candidate ID:* " +
       id +
       "\n" +
-      "*First Name:* " +
-      first_name +
-      "\n" +
-      "*Last Name:* " +
-      last_name +
+      "*Name:* " +
+      name +
       "\n" +
       "*Problem:* " +
       pb +

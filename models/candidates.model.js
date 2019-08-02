@@ -8,10 +8,7 @@ let Candidates = new Schema({
     type: Number,
     required: true
   },
-  candidateFirstName: {
-    type: String
-  },
-  candidateLastName: {
+  candidateName: {
     type: String
   },
   problem: {
@@ -22,9 +19,6 @@ let Candidates = new Schema({
     default:
       date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
   }
-  //   candidatePhoneNumber: {
-  //     type: String
-  //   }
 });
 
 module.exports = mongoose.model("Candidates", Candidates);

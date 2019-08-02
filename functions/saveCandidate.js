@@ -3,7 +3,7 @@ let Candidate = require("../models/candidates.model");
 const postSlack = require("./postSlack");
 
 // function to store candidates depending on the problem encountered in mongodb database
-const saveCandidate = (pb, id, first_name, last_name, res) => {
+const saveCandidate = (pb, id, name, res) => {
   const date = new Date();
 
   // checks if the candidateID already exists
@@ -12,8 +12,7 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
       if (!candidate) {
         const candidate = new Candidate({
           candidateId: id,
-          candidateFirstName: first_name,
-          candidateLastName: last_name,
+          candidatetName: name,
           problem: pb,
           date:
             date.getDate() +
@@ -25,14 +24,14 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
 
         candidate.save((err, candidate) => {
           if (err) return console.error(err);
-          postSlack(id, first_name, last_name, pb);
+          postSlack(id, name, pb);
           console.log(candidate.candidateId + " saved to the database : " + pb);
           res.json({
             saveCandidate: {
               update: false,
               smsFail: {
                 id: `${id}`,
-                to: `${first_name} ${last_name}`,
+                to: `${name}`,
                 problem: `${pb}`
               }
             }
@@ -56,7 +55,7 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
           { upsert: true, useFindAndModify: false },
           (err, doc) => {
             if (err) return res.send(500, { error: err });
-            postSlack(id, first_name, last_name, pb);
+            postSlack(id, name, pb);
 
             console.log(
               candidate.candidateId + " saved to the database (update) : " + pb
@@ -67,7 +66,7 @@ const saveCandidate = (pb, id, first_name, last_name, res) => {
                 update: true,
                 smsFail: {
                   id: `${id}`,
-                  to: `${first_name} ${last_name}`,
+                  to: `${name}`,
                   problem: `${pb}`
                 }
               }
