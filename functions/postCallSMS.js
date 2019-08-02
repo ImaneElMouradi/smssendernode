@@ -16,12 +16,10 @@ const shortcode = "United Remote"; // you can add in the API /&shortcode=${sende
 const testUrl = "https://en0bf1o2s239lv.x.pipedream.net/SendSMS";
 
 // function to send SMS - uses bulksms.ma (mock for now) - 5 tries
-const postCallSMS = (res, phoneNum, id, first_name, last_name, message) => {
+const postCallSMS = (res, phoneNum, id, name, message) => {
   request(
     {
-      url: `https://bulksms.ma/developer/sms/send?token=${
-        process.env.bulksmsToken
-      }&tel=${phoneNum}&message=${message}`,
+      url: testUrl,
       method: "PUT"
     },
     opts,
@@ -32,17 +30,15 @@ const postCallSMS = (res, phoneNum, id, first_name, last_name, message) => {
         res.json({
           sendSMS: {
             success: true,
-            to: `${first_name} ${last_name}`,
+            to: `${name}`,
             phone: `${phoneNum}`,
             message: `${message}`
           }
         });
       }
       if (err) {
-        console.log(
-          `sms fail to ${id} ${last_name} ${first_name}, error: ${err}`
-        );
-        saveCandidate("5xx or Network err", id, first_name, last_name, res);
+        console.log(`sms fail to ${id} ${name}, error: ${err}`);
+        saveCandidate("5xx or Network err", id, name, res);
       }
     }
   );

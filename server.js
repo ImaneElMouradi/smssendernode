@@ -1,18 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-// for logs
-const fs = require("fs");
-const util = require("util");
-
-const logFile = fs.createWriteStream("log.txt", { flags: "a" });
-const logStdout = process.stdout;
-// overwrite console.log to save logs in log.txt and on console (default)
-console.log = e => {
-  logFile.write(util.format(e) + "\n");
-  logStdout.write(util.format(e) + "\n");
-};
-
 // for process.env variables
 const dotenv = require("dotenv");
 dotenv.config();
@@ -31,6 +19,7 @@ db.once("open", () => {
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 
 // endpoint (of the 3rd party's webhook)
 const routerWebhook = require("./routes/webhook/sms");

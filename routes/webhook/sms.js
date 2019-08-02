@@ -10,17 +10,12 @@ const verifyToken = require("../../functions/verifyToken");
 
 router.post("/send_quiz", verifyToken, (req, res) => {
   // endpoint  for the quiz phase
-  console.log(req);
-  const message =
-    "Congratulations! You have been selected to move to the next step of the hiring process at United Remote. We kindly ask that you complete one of the short tech quizzes sent to you on your email address.  ";
-  send_SMS(message, req, res);
+  send_SMS("send-quiz", req, res);
 });
 
 router.post("/send_challenge", verifyToken, (req, res) => {
   // endpoint for the challenge phase
-  const message =
-    "Congratulations! You have been selected to move to the 2nd step in the journey to join United Remote. Please check your email address for the coding challenge";
-  send_SMS(message, req, res);
+  send_SMS("send-challenge", req, res);
 });
 
 module.exports = router;
