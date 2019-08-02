@@ -9,6 +9,7 @@ const opts = {
 
 const saveCandidate = require("./saveCandidate");
 const postCallSMS = require("./postCallSMS");
+const verifyPhoneNumber = require("./verifyPhoneNumber");
 
 const send_SMS = (message, req, res) => {
   // we get the candidate's email from mixmax webhook
@@ -36,9 +37,9 @@ const send_SMS = (message, req, res) => {
           const first_name = name.split(" ")[0];
           const last_name = name.split(" ")[1];
 
-          if (phones[0]) {
+          if (typeof phones !== "undefined") {
             const phoneNum = phones[0]; // have to check if the number is valid (format like 06- etc)
-            if (phoneNum.length != 10 || phoneNum[0] != "0") {
+            if (!verifyPhoneNumber(phoneNum)) {
               saveCandidate("Wrong number", id, first_name, last_name, res);
             } else {
               postCallSMS(res, phoneNum, id, first_name, last_name, message);
