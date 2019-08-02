@@ -22,14 +22,7 @@ const postCallSMS = (res, phoneNum, id, first_name, last_name, message) => {
       url: `https://bulksms.ma/developer/sms/send?token=${
         process.env.bulksmsToken
       }&tel=${phoneNum}&message=${message}`,
-      method: "POST",
-      json: true,
-      body: {
-        success: true,
-        to: `${first_name} ${last_name}`,
-        phone: `${phoneNum}`,
-        message: `${message}`
-      }
+      method: "PUT"
     },
     opts,
     (err, response, body) => {
