@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 const send_SMS = require("../../functions/send");
-
 const verifyToken = require("../../functions/verifyToken");
 
 // endpoints for mixmax webhook

@@ -23,16 +23,21 @@ const saveCandidate = (pb, id, name, res) => {
         });
 
         candidate.save((err, candidate) => {
-          if (err) return console.error(err);
+          if (err)
+            return console.log(
+              `error: couldn't save candidate to database. Id: ${id}, Name: ${name}`
+            );
           postSlack(id, name, pb);
-          console.log(candidate.candidateId + " saved to the database : " + pb);
+          console.log(
+            `Id: ${id}, Name: ${name} saved to the database. Issue: ${pb}`
+          );
           res.json({
             saveCandidate: {
               update: false,
               smsFail: {
                 id: `${id}`,
                 to: `${name}`,
-                problem: `${pb}`
+                issue: `${pb}`
               }
             }
           });
@@ -54,11 +59,19 @@ const saveCandidate = (pb, id, name, res) => {
           },
           { upsert: true, useFindAndModify: false },
           (err, doc) => {
-            if (err) return res.send(500, { error: err });
+            if (err) {
+              console.log(
+                `error: couldn't find and update candidate in database. Id: ${id}, Name: ${name}`
+              );
+              return res.status(500).json({
+                success: false,
+                error: `couldn't find and update candidate in database. Id: ${id}, Name: ${name}`
+              });
+            }
             postSlack(id, name, pb);
 
             console.log(
-              candidate.candidateId + " saved to the database (update) : " + pb
+              `Id: ${id}, Name: ${name} saved (update) to the database. Issue: ${pb}`
             );
 
             res.json({
@@ -67,7 +80,7 @@ const saveCandidate = (pb, id, name, res) => {
                 smsFail: {
                   id: `${id}`,
                   to: `${name}`,
-                  problem: `${pb}`
+                  issue: `${pb}`
                 }
               }
             });
@@ -76,8 +89,11 @@ const saveCandidate = (pb, id, name, res) => {
       }
     })
     .catch(err => {
-      console.log(err);
-      res.status(500).send();
+      console.log(`error: couldn't interact with database`);
+      res.status(500).json({
+        success: false,
+        error: `couldn't interact with database`
+      });
     });
 };
 

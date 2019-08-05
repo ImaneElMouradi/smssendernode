@@ -34,10 +34,10 @@ const postSlack = (id, name, pb) => {
       "*Name:* " +
       name +
       "\n" +
-      "*Problem:* " +
+      "*Issue:* " +
       pb +
-      "\n" +
-      "--> For more details, please <http://localhost:3000| click here>"
+      "\n"
+    // "--> For more details, please <http://localhost:3000| click here>"
   };
   payload = JSON.stringify(payload);
 

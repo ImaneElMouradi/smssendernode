@@ -25,7 +25,9 @@ const postCallSMS = (res, phoneNum, id, name, message) => {
     opts,
     (err, response, body) => {
       if (response) {
-        console.log("send SMS to " + phoneNum + ". Message: " + message);
+        console.log(
+          `Send SMS to candidate ${name}, number: ${phoneNum}. Message: ${message}`
+        );
 
         res.json({
           sendSMS: {
@@ -37,7 +39,9 @@ const postCallSMS = (res, phoneNum, id, name, message) => {
         });
       }
       if (err) {
-        console.log(`sms fail to ${id} ${name}, error: ${err}`);
+        console.log(
+          `couldn't send SMS to ${id} : ${name}, error in PUT request to bulksms.`
+        );
         saveCandidate("5xx or Network err", id, name, res);
       }
     }
