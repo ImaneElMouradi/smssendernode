@@ -40,14 +40,6 @@ const send_SMS = (type, req, res) => {
           const { id, phone_numbers, last_name, first_name } = resp.body[0];
           const name = `${first_name} ${last_name}`;
 
-          console.log(
-            util.inspect(req.body, {
-              showHidden: false,
-              depth: null,
-              colors: true
-            })
-          );
-
           if (typeof phone_numbers[0] !== "undefined") {
             const phoneNum = phone_numbers[0].value; // have to check if the number is valid
             if (!verifyPhoneNumber(phoneNum)) {
