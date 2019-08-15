@@ -5,8 +5,6 @@ const router = express.Router();
 const send_SMS = require("../../functions/send");
 const verifyToken = require("../../functions/verifyToken");
 
-const Sms = require("../../models/sms.model.js");
-
 // endpoints for mixmax webhook
 
 router.post("/send_quiz", verifyToken, (req, res) => {

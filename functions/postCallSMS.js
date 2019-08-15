@@ -19,7 +19,9 @@ const testUrl = "https://en0bf1o2s239lv.x.pipedream.net/SendSMS";
 const postCallSMS = (res, phoneNum, id, name, message) => {
   request(
     {
-      url: testUrl,
+      url: `https://bulksms.ma/developer/sms/send?token=${
+        process.env.bulksmsToken
+      }&tel=${phoneNum}&message=${message}`,
       method: "PUT"
     },
     opts,
