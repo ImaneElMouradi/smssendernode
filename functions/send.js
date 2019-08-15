@@ -34,7 +34,7 @@ const send_SMS = (type, req, res) => {
         json: true
       },
       opts,
-      (err, resp, body) => {
+      async (err, resp, body) => {
         // console.log(req.body);
         if (typeof resp.body[0] !== "undefined") {
           const { id, phone_numbers, last_name, first_name } = resp.body[0];
@@ -45,9 +45,17 @@ const send_SMS = (type, req, res) => {
             if (!verifyPhoneNumber(phoneNum)) {
               saveCandidate("Wrong number", id, name, res);
             } else {
-              const smsMessage = customizeSMS(type, name);
+              const smsMessage = await customizeSMS(type, name);
+
               if (smsMessage) {
                 postCallSMS(res, phoneNum, id, name, smsMessage);
+              } else {
+                console.log("ERROR: Type specified not found");
+
+                res.status(400).json({
+                  success: false,
+                  msg: "Type specified not found"
+                });
               }
             }
           } else {
@@ -75,7 +83,7 @@ const send_SMS = (type, req, res) => {
       }
     );
   } else {
-    // if there's no email in greenhouse webhook (is that even possible?)
+    // if there's no email in mixmax webhook (is that even possible?)
     console.log(`Error: couldn't find email in client request `);
     res.status(400).json({
       success: false,

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const date = new Date();
 
-let Candidates = new Schema({
+const CandidatesSchema = new Schema({
   candidateId: {
     type: Number,
     required: true
@@ -21,4 +21,4 @@ let Candidates = new Schema({
   }
 });
 
-module.exports = mongoose.model("Candidates", Candidates);
+module.exports = mongoose.model("Candidates", CandidatesSchema);

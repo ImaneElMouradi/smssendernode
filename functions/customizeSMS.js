@@ -1,12 +1,11 @@
-const customizeSMS = (message, name) => {
-  switch (message) {
-    case "send-quiz":
-      return `Congratulations ${name}! You have been selected to move to the next step of the hiring process at United Remote. We kindly ask that you complete one of the short tech quizzes sent to you on your email address.`;
-    case "send-challenge":
-      return `Congratulations ${name}! You have been selected to move to the 2nd step in the journey to join United Remote. Please check your email address for the coding challenge";`;
-    default:
-      return null;
+const Sms = require("../models/sms.model");
+
+const customizeSMS = async (type, name) => {
+  const sms = await Sms.findOne({ type });
+  if (sms) {
+    return sms.content;
   }
+  return null;
 };
 
 module.exports = customizeSMS;

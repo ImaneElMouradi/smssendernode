@@ -12,7 +12,7 @@ const saveCandidate = (pb, id, name, res) => {
       if (!candidate) {
         const candidate = new Candidate({
           candidateId: id,
-          candidatetName: name,
+          candidateName: name,
           problem: pb,
           date:
             date.getDate() +
